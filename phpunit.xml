@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit bootstrap="bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="palya test suite">
+            <directory>./tests/PalyaTest</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>./src</directory>
+        </whitelist>
+    </filter>
+<!--
+    <logging>
+        <log type="coverage-html" target="./cache/phpunit/coverage"/>
+    </logging>
+-->
+</phpunit>
