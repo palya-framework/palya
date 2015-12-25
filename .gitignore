@@ -1,13 +1,7 @@
-.buildpath
 .idea
-.project
-.settings
 .vagrant
 
 composer.lock
 composer.phar
 
-cache/
-log/
-puppet/
 vendor/
