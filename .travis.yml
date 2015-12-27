@@ -3,7 +3,6 @@ language: php
 php:
   - 5.6
   - 7.0
-  - hhvm
 
 sudo: false
 
@@ -12,6 +11,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
+  - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - travis_retry composer self
 
 install:
