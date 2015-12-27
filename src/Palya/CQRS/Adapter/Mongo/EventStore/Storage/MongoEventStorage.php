@@ -76,10 +76,13 @@ class MongoEventStorage extends AbstractMongoStorage implements EventStorageInte
         }
 
         try {
-            $this->client
-                ->selectCollection($this->options->getDatabase(), $eventStream->getEventProviderId()->toString())
-//                ->createIndex(['version' => 1], ['unique' => true, 'background' => true])
-                ->batchInsert($events);
+            $collection = $this->client->selectCollection(
+                $this->options->getDatabase(),
+                $eventStream->getEventProviderId()->toString()
+            );
+
+            $collection->createIndex(['version' => 1], ['unique' => true, 'background' => true]);
+            $collection->batchInsert($events);
         } catch (\MongoCursorException $e) {
             throw new EventStoreException(__METHOD__ . ' : ' . $e->getMessage());
         } catch (\Exception $e) {

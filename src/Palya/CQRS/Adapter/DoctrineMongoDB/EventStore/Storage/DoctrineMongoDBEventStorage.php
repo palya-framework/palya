@@ -76,10 +76,13 @@ class DoctrineMongoDBEventStorage extends AbstractDoctrineMongoDBStorage impleme
         }
 
         try {
-            $this->connection
-                ->selectCollection($this->options->getDatabase(), $eventStream->getEventProviderId()->toString())
-//                ->ensureIndex(['version' => 1], ['unique' => true, 'background' => true])
-                ->batchInsert($events);
+            $collection = $this->connection->selectCollection(
+                $this->options->getDatabase(),
+                $eventStream->getEventProviderId()->toString()
+            );
+
+            $collection->ensureIndex(['version' => 1], ['unique' => true, 'background' => true]);
+            $collection->batchInsert($events);
         } catch (\MongoCursorException $e) {
             throw new EventStoreException(__METHOD__ . ' : ' . $e->getMessage());
         } catch (\Exception $e) {
