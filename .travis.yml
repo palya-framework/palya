@@ -27,4 +27,6 @@ install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
 
 script:
-  - ./vendor/bin/phpunit
+  - ./vendor/bin/phpunit --exclude-group slow --coverage-clover clover.xml
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover clover.xml

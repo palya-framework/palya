@@ -12,7 +12,7 @@ apt-get update -y
 apt-get install -y curl git
 
 # php ##########################################################################
-apt-get install -y php5 php5-intl php5-mongo php5-xcache
+apt-get install -y php5 php5-intl php5-mongo php5-xdebug
 
 # mongo ########################################################################
 apt-get install -y mongodb-org
